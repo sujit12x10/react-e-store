@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import { Card } from "../components/index";
 import { useDispatch } from "react-redux";
-import { addProduct, remodveProduct } from "../store/CartSlice";
+import { addProduct, remodveProduct } from "../store/cartSlice";
 
 export const Product = () => {
     const [product, setProduct] = useState(null)
