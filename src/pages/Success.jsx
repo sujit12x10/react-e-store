@@ -12,10 +12,13 @@ export const Success = () => {
 
     const getDate = (date) => new Date(date * 1000).toUTCString()
     const stripe = Stripe(import.meta.env.VITE_STRIPE_PRIVATE_KEY)
+    console.log(import.meta.env.VITE_STRIPE_PRIVATE_KEY);
     
 
     const getSession = async () => {
         // const session = await stripe.checkout.sessions.retrieve(location.search)
+        console.log(location.search.split("=")[1]);
+        
         const session = await stripe.checkout.sessions.retrieve(location.search.split("=")[1])
 
         setCustomer({
