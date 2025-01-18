@@ -60,7 +60,8 @@ export const Cart = () => {
         const headers = {
             "Content-Type": "application/json"
         }
-        const response = await fetch("http://localhost:7000/api/create-checkout-session", {
+        // const response = await fetch("http://localhost:7000/api/create-checkout-session", {
+        const response = await fetch("https://stripe-server-3nniakfbd-sujit12x10s-projects.vercel.app/api/create-checkout-session", {
             method: "POST",
             headers: headers,
             body: JSON.stringify(body)
