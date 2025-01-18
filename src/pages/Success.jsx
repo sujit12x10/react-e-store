@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useLocation } from "react-router-dom"
-import { emptyCart } from "../store/CartSlice"
+import { emptyCart } from "../store/cartSlice"
 import Stripe from "stripe"
 import { useState } from "react"
 
