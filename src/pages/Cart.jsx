@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { addProduct, getCartTotal } from "../store/CartSlice"
+import { addProduct, getCartTotal } from "../store/cartSlice"
 import { useState } from "react"
 import { NavLink } from "react-router-dom"
 import { GoTrash } from "react-icons/go";
