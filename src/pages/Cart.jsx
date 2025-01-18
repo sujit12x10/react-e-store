@@ -3,7 +3,7 @@ import { addProduct, getCartTotal } from "../store/CartSlice"
 import { useState } from "react"
 import { NavLink } from "react-router-dom"
 import { GoTrash } from "react-icons/go";
-import { remodveProduct } from "../store/CartSlice";
+import { remodveProduct } from "../store/cartSlice";
 
 import { loadStripe } from "@stripe/stripe-js";
 
