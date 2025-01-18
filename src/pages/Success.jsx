@@ -17,7 +17,6 @@ export const Success = () => {
 
     const getSession = async () => {
         // const session = await stripe.checkout.sessions.retrieve(location.search)
-        console.log(location.search.split("=")[1]);
         
         const session = await stripe.checkout.sessions.retrieve(location.search.split("=")[1])
 
