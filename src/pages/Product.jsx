@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
-import { Card } from "../components/index";
+import { Card, Loader } from "../components/index";
 import { useDispatch } from "react-redux";
 import { addProduct, remodveProduct } from "../store/cartSlice";
 
 export const Product = () => {
+    const [loading, setLoading] = useState({
+        productLoader: true,
+        relatedProductLoader: true,
+    })
     const [product, setProduct] = useState(null)
     const [relatedProduct, setRelatedProduct] = useState(null)
     const [currentImage, setCurrentImage] = useState(null)
@@ -22,6 +26,7 @@ export const Product = () => {
         fetch(`https://sujit1210.pythonanywhere.com/api/v1/products/${params.slug}/`)
         .then((resp) => resp.json())
         .then((data) => setProduct(data))
+        // .then(setLoader(false))
     }, [product, relatedProduct]) 
     
     // Related Products
@@ -29,7 +34,7 @@ export const Product = () => {
         product && 
             fetch(`https://sujit1210.pythonanywhere.com/api/v1/categories/${product.category[0]}/products/`)
             .then((resp) => resp.json())
-            .then((data) => setRelatedProduct(data.slice(0, 4)))
+            .then((data) => setRelatedProduct(data.slice(0, 5)))
     }, [product])
     
     return (
@@ -67,7 +72,7 @@ export const Product = () => {
                             </div>
                             <div className="flex items-center space-x-4">
                                 <div className="flex items-center border rounded-lg px-4 py-2">
-                                    <select onClick={(event) => setQuantity(event.target.value)} className="bg-gray-100" name="" id="">
+                                    <select onClick={(event) => setQuantity(event.target.value)} className="" name="" id="">
                                         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
                                             <option key={num} className="bg-gray-100" value={num}>{num}</option>
                                         ))}
@@ -88,11 +93,11 @@ export const Product = () => {
                             <div className="mt-10 p-8">
                                 <h2 className="text-center text-xl font-bold">You may also like</h2>
                                 <hr className="border-2 border-gray-600 w-20 mt-3 m-auto"/>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 mt-8">
 
                                 {
                                     relatedProduct.map(product => (
-                                        <Card product={product}/>
+                                        <Card key={product.id} product={product}/>
                                     ))
                                 }
                                 </div>

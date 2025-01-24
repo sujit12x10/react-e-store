@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react"
-import { Card } from "./index"
+import { Card, Loader } from "./index"
 
 export const WomenCollections = () => {
+    const [loader, setLoader] = useState(true)
     const [products, setProducts] = useState(null)
     
     useEffect(() => {
         fetch("https://sujit1210.pythonanywhere.com/api/v1/categories/women/products/")
         .then(resp => resp.json())
         .then(data => setProducts(data.slice(0, 12)))
+        .then(setLoader(false))
     }, [products])
 
-    return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
+    return loader ? <Loader /> : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 mt-8">
             {
                 products && products.map((product) => (
                     <Card key={product.id} product={product}/>

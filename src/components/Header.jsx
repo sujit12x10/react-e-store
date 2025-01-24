@@ -10,7 +10,9 @@ import { GiShoppingBag } from "react-icons/gi";
 import { IoMdInformationCircle } from "react-icons/io";
 import { TiMessages } from "react-icons/ti";
 
-import { useState } from "react"
+import { Card } from "../components/index"
+
+import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { useAuth } from "../contexts/authContext";
 import { doSignOut } from "../firebase/auth";
@@ -18,12 +20,17 @@ import { doSignOut } from "../firebase/auth";
 export const Header = () => {
 
     const navigate = useNavigate()
+    const [searchTerm, setSearchTerm] = useState(null) 
+    const [searchProducts, setSearchProducts] = useState([])
     const [showSearchbar, setShowSearchbar] = useState(false)
     const [isLogoutButton, setIsLogoutButton] = useState(false)
     const { userLoggedIn, currentUser } = useAuth()
     const [login, setLogin] = useState(false)
     const cartItems = useSelector(state => state.cart)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+    console.log(searchTerm);
+    
     const items = [
         {
             name: "HOME",
@@ -46,6 +53,17 @@ export const Header = () => {
             path: "/about"
         },
     ]
+
+    useEffect(() => {
+        fetch("https://sujit1210.pythonanywhere.com/api/v1/products/")
+        .then(response => response.json())
+        .then(data => {
+            const products = data.filter(products => products.name.includes(searchTerm))
+            setSearchProducts(products)
+        })
+    }, [searchTerm])
+    
+
     return(
         <>
             {
@@ -60,16 +78,35 @@ export const Header = () => {
                     </div>
                 </div> : ""
             }
+
+            {/* SearchBar */}
             {
-                showSearchbar ? 
-                <div className="flex justify-center fixed bg-white z-50 w-screen py-6 h-20">
-                    <form action="" className="flex justify-center ">
+                <div className={`${showSearchbar ? "flex" : "hidden"} flex-col fixed justify-center overflow-y-scroll bg-white z-50 w-screen p-6`}>
+                    <form action="" className="flex justify-center h-10">
                         <button className="bg-slate-100 px-2"><VscSearch size={15}/></button>
-                        <input className="bg-slate-100 inline min-w-80 text-center py-2 rounded outline-none font-poppins" type="text" placeholder="serach product..."/>
-                        <button type="none" className="bg-slate-100 px-2" onClick={() => setShowSearchbar(false)}><AiOutlineClose size={15}/></button>
+                        <input onChange={(event) => event.target.value === "" ? setSearchTerm(null)  : setSearchTerm(event.target.value)} className="bg-slate-100 inline min-w-80 text-center py-2 rounded outline-none font-poppins" type="text" placeholder="serach product..."/>
+                        <button type="none" className="bg-slate-100 px-2" onClick={(event) => {
+                            event.preventDefault()
+                            setShowSearchbar(false)
+                            setSearchProducts([])
+                            }}><AiOutlineClose size={15}/>
+                        </button>
                     </form>
-                </div> : ""
+                        {
+                            searchProducts.length > 0 && 
+                            <div className="w-screen h-screen p-12">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 mt-8 pb-40">
+                                    {
+                                        searchProducts.map(product => <Card key={product.id} product={product}/>)
+                                    }
+                                </div>
+                            </div>
+                        }
+                   
+                </div>
             }
+
+            {/* Navigation */}
             <header className="top-0 fixed w-full z-40">
                 <div className="bg-white mx-auto flex px-8 lg:px-32 py-4 justify-between items-center">
                     <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden transition-all">

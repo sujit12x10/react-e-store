@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react"
 import { NavLink, useLocation } from "react-router-dom"
-import { HeroImage  } from "../components/index"
+import { HeroImage, Loader  } from "../components/index"
 import { ToastContainer, toast } from 'react-toastify';
 import { ProductCard, WomenCollections, MenCollections, FeaturedSection, Card, NewArrivals } from "../components/index"
 
 export const Home = () => {
+
+    const [loader, setLoader] = useState({
+        newArrivalLoader: true,
+        womenCollectionLoader: true,
+        menCollectionLoader: true,
+    })
     const [products, setProducts] = useState(null)
     const location = useLocation()
 

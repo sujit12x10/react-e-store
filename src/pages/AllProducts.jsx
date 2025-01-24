@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react"
-import { Card } from "../components/index"
+import { Card, Loader } from "../components/index"
 
 export const AllProducts = () => {
-    // const [loading, setLoading] = useState(true)
     const [categories, setCategories] = useState(null)
     const [allProducts, setAllProducts] = useState(null)
     const [categoryName, setcategoryName] = useState("")
@@ -23,6 +22,7 @@ export const AllProducts = () => {
         fetch(productsURL)
         .then(resp => resp.json())
         .then(data => setAllProducts(data))
+        .then(() => setLoading(false))
     }, [allProducts, categoryName])
 
 
@@ -53,7 +53,7 @@ export const AllProducts = () => {
                         ))
                     }
                 </select>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 mt-8">
                     {
                         allProducts && allProducts.map((product) => (
                             <Card key={product.id} product={product}/>
