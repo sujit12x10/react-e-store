@@ -4,11 +4,14 @@ import { useState } from "react"
 import { NavLink } from "react-router-dom"
 import { GoTrash } from "react-icons/go";
 import { remodveProduct } from "../store/cartSlice";
+import { useAuth } from "../contexts/authContext";
+import { Navigate } from "react-router-dom";
 
 import { loadStripe } from "@stripe/stripe-js";
 
 
 export const Cart = () => {
+    const { userLoggedIn } = useAuth()
     const cartItems = useSelector(state => state.cart)
     const dispatch = useDispatch()
     const cartTotal = useSelector(getCartTotal)
@@ -78,7 +81,7 @@ export const Cart = () => {
         }
     }
 
-    return (
+    return userLoggedIn ? (
         cartItems.length === 0 ? 
         <div className="py-16 h-screen">
             <h2 className="text-center pt-10 text-xl font-bold">Your cart is currently empty.</h2>
@@ -151,5 +154,5 @@ export const Cart = () => {
             </aside>
         </div>
         )
-    )
+    ) : <Navigate to="/login" state={{ message: "You must login first!"}}/>
 }

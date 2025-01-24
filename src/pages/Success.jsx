@@ -12,7 +12,6 @@ export const Success = () => {
 
     const getDate = (date) => new Date(date * 1000).toUTCString()
     const stripe = Stripe(import.meta.env.VITE_STRIPE_PRIVATE_KEY)
-    console.log(import.meta.env.VITE_STRIPE_PRIVATE_KEY);
     
 
     const getSession = async () => {

@@ -2,10 +2,10 @@ export const About = () => {
     return (
         <>
             <section style={{'--image-url': `url("https://preview.colorlib.com/theme/selling/images/hero_2.jpg.webp")`}} 
-                className='bg-[image:var(--image-url)] bg-cover bg-right-top mt-12'>
-                <div className="h-screen items-end bg-backOverlay">
-                    <div className="flex flex-col items-center mb-64 px-10 pt-36 text-center">
-                        <h1 className="">
+            className='bg-[image:var(--image-url)] bg-cover bg-[60%] md:bg-right-top mt-12 h-screen'>
+                <div className="bg-black h-screen opacity-70">
+                    <div className="flex flex-col items-center py-32 px-5 text-center">
+                        <h1 className="opacity-100">
                             <span className="text-white text-3xl font-bold font-poppins">BLAKE</span> <br />
                             <span className="text-white font-semibold">Elevate Your Everyday</span>
                         </h1>
@@ -15,7 +15,7 @@ export const About = () => {
                             Deliver happiness to customers, employees, vendors, shareholders, and the community in a long-term, sustainable way. 
                         </p>
                         <a href="/products">
-                            <button className="text-base uppercase font-bold font-poppins px-4 py-2 mt-4 bg-neutral-800 text-white hover:scale-110 hover:text-cyan-200">
+                            <button className="text-base uppercase font-bold font-poppins px-4 py-2 mt-4 border-2 rounded text-white hover:scale-110 hover:text-cyan-200">
                                 Explore Products
                             </button>
                         </a>

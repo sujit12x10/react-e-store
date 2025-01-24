@@ -1,10 +1,20 @@
 import { useEffect, useState } from "react"
-import { NavLink } from "react-router-dom"
+import { NavLink, useLocation } from "react-router-dom"
 import { HeroImage  } from "../components/index"
+import { ToastContainer, toast } from 'react-toastify';
 import { ProductCard, WomenCollections, MenCollections, FeaturedSection, Card, NewArrivals } from "../components/index"
 
 export const Home = () => {
     const [products, setProducts] = useState(null)
+    const location = useLocation()
+
+    const notify = () => {
+        toast.success(location.state)
+    }
+
+    // useEffect(() => {
+    //     location.state && notify()
+    // }, [])
 
     useEffect(() => {
         fetch("https://sujit1210.pythonanywhere.com/api/v1/products/")
@@ -14,9 +24,10 @@ export const Home = () => {
 
     return (
         <>
+            <ToastContainer autoClose={2000} position="bottom-left" type="error" theme="dark"/>
             {/* Hero Section */}
             <div style={{'--image-url': `url("https://avedafashion.myshopify.com/cdn/shop/files/parallaxbackground1.png?v=1614316643")`}} 
-            className='bg-[image:var(--image-url)] h-screen bg-cover bg-[60%] mt-16 relative overflow-hidden'>
+                className='bg-[image:var(--image-url)] h-screen bg-cover bg-[60%] mt-16 relative overflow-hidden'>
                 <div className="mb-64 z-10 absolute top-1/4 px-14 md:px-20">
                     <h1 className="text-[#333333] uppercase text-4xl md:text-6xl lg:text-7xl font-extrabold font-poppins">
                         Style 

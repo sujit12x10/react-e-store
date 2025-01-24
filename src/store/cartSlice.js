@@ -18,7 +18,6 @@ const cartSlice = createSlice({
                 })
                 index !== -1 ? state.cart[index] = item : state.cart.push(item)
             } else {
-                console.log("empty cart")
                 state.cart.push(item)
             }
 
