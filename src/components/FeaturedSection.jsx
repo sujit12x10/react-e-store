@@ -20,7 +20,7 @@ export const FeaturedSection = () => {
         },
     ]
     return (
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-3 my-20">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-3 my-12">
             {
                 items.map((item) => (
                     <div key={item.title} className="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/30">

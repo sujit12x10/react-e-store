@@ -2,12 +2,17 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     cart: localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [],
+    user: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null,
 }
 
 const cartSlice = createSlice({
     name: "cart",
     initialState,
     reducers: {
+        setUser: (state, action) => {
+            state.user.push(action)
+        },
+
         addProduct: (state, action) => {
             const item = action.payload
             let index
@@ -40,4 +45,4 @@ export const getCartTotal = (state) => state.cart.reduce((total, item) => total 
 // For Store to Register Our Reducers
 export const cartReducer = cartSlice.reducer
 
-export const {addProduct, remodveProduct, emptyCart} = cartSlice.actions
+export const {setUser, addProduct, remodveProduct, emptyCart} = cartSlice.actions

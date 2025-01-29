@@ -28,8 +28,19 @@ export const Header = () => {
     const [login, setLogin] = useState(false)
     const cartItems = useSelector(state => state.cart)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const [header, setHeader] = useState("transparent")
 
-    console.log(searchTerm);
+    const listenScrollEvent = (event) => {
+        if (window.scrollY > window.innerHeight/3) return setHeader("white")
+        else setHeader("transparent")
+    }
+
+    useEffect(() => {
+        window.addEventListener('scroll', listenScrollEvent);
+
+        return () =>
+            window.removeEventListener('scroll', listenScrollEvent);
+    }, []);
     
     const items = [
         {
@@ -108,7 +119,7 @@ export const Header = () => {
 
             {/* Navigation */}
             <header className="top-0 fixed w-full z-40">
-                <div className="bg-white mx-auto flex px-8 lg:px-32 py-4 justify-between items-center">
+                <div className={`bg-${header} mx-auto flex px-8 lg:px-32 py-4 justify-between items-center`}>
                     <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden transition-all">
                         {isMenuOpen ? <AiOutlineClose size={30}/> : <GiHamburgerMenu size={30}/>}
                     </button>
