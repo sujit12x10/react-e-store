@@ -2,7 +2,7 @@ export const About = () => {
     return (
         <>
             <section style={{'--image-url': `url("https://preview.colorlib.com/theme/selling/images/hero_2.jpg.webp")`}} 
-            className='bg-[image:var(--image-url)] bg-cover bg-[60%] md:bg-right-top mt-12 h-screen'>
+                className='bg-[image:var(--image-url)] bg-cover bg-[60%] md:bg-right-top h-screen'>
                 <div className="bg-black h-screen opacity-70">
                     <div className="flex flex-col items-center py-32 px-5 text-center">
                         <h1 className="opacity-100">

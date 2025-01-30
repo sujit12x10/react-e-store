@@ -25,16 +25,16 @@ export const Register = () => {
 
     return (
         
-        <div className="flex flex-col  min-h-screen items-center font-poppins px-40 py-36">
+        <div className="flex flex-col min-h-screen font-poppins py-28 px-16 md:px-40">
             {userLoggedIn && <Navigate to="/" />}
-            <h2 className="text-2xl font-bold text-center uppercase">Register</h2>
-            <form onSubmit={onSubmit} className="mt-6 p-10 w-96 flex flex-col bg-slate-100 rounded shadow-md">
-                <input className="bg-white text-center w-full p-2 my-3 " required onChange={handleChange} name="name" type="text" placeholder="Name"/>
-                <input className="bg-white text-center w-full p-2 my-3 " required onChange={handleChange} name="email" type="email" placeholder="Email Address"/>
-                <input className="bg-white text-center w-full p-2 my-3 " required onChange={handleChange} name="password" type="password" placeholder="Enter Password"/>
-                <input className="bg-white text-center w-full p-2 my-3 " required onChange={handleChange} name="password2" type="password" placeholder="Enter Password Again"/>
-                <button className="bg-neutral-900 w-full rounded text-white py-2 mt-2 uppercase font-bold">Register</button>
-                <a href="/login" className="text-blue-800 py-4 text-center font-bold uppercase">Already have an account.</a>
+            <h2 className="text-[#333333] font-bold text-center text-xl mb-4 font-poppins uppercase">Register</h2>
+            <form onSubmit={onSubmit} className="flex flex-col space-y-5">
+                <input className="p-3 rounded border text-sm" required onChange={handleChange} name="name" type="text" placeholder="Name"/>
+                <input className="p-3 rounded border text-sm" required onChange={handleChange} name="email" type="email" placeholder="Email Address"/>
+                <input className="p-3 rounded border text-sm" required onChange={handleChange} name="password" type="password" placeholder="Enter Password"/>
+                <input className="p-3 rounded border text-sm" required onChange={handleChange} name="password2" type="password" placeholder="Enter Password Again"/>
+                <button className="bg-[#333333] text-white font-poppins font-semibold py-2 text-sm w-[100px] rounded">Register</button>
+                <a href="/login" className="text-blue-800 py-4 underline italic">Already have an account.</a>
             </form>
         </div>
     )

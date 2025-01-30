@@ -20,7 +20,7 @@ export const Crousel = ({children: slides}) => {
                     {slide}
                 </div>
             </div>
-                <button onClick={prev} className="absolute top-[48%] left-5 p-1 z-50 rounded-full bg-white/80 shadow text-gray-800 hover:bg-white">
+                <button onClick={prev} className="absolute top-[48%] left-5 p-1 z-40 rounded-full bg-white/80 shadow text-gray-800 hover:bg-white">
                     <MdNavigateBefore size={30}/>
                 </button>
                 <button onClick={next} className="absolute top-[48%] right-5 p-1 rounded-full bg-white/80 shadow text-gray-800 hover:bg-white">

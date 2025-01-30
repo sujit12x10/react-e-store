@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { NavLink, useLocation } from "react-router-dom"
-import { HeroImage, Loader, Slider, Crousel  } from "../components/index"
+import { HeroImage, Loader, Crousel  } from "../components/index"
 import { ToastContainer, toast } from 'react-toastify';
 import { ProductCard, WomenCollections, MenCollections, FeaturedSection, Card, NewArrivals } from "../components/index"
 
@@ -41,11 +41,12 @@ export const Home = () => {
                             Confidence
                         </h1>
                         <p className="text-gray-600 w-full font-racing text-2xl">Dress smart, look trendy!</p>
-                        <a href="" className="bg-neutral-800 font-Montserrat text-white uppercase text-sm font-semibold px-4 py-2 mt-2 inline-block hover:scale-110 hover:text-gray-300 transition-all">
+                        <a href="/products" className="bg-neutral-800 font-Montserrat text-white uppercase text-sm font-semibold px-4 py-2 mt-2 inline-block hover:scale-110 hover:text-gray-300 transition-all">
                             Explore Products
                         </a>
                     </div>
                 </div>
+                
                 <div style={{'--image-url': `url("https://www.pxdraft.com/wrap/shopapp/assets/img/fashion2/home-banner-3.jpg")`}} className='bg-[image:var(--image-url)] h-screen w-screen bg-cover bg-[60%] relative overflow-hidden'>
                     <div className="mb-64 z-10 absolute top-1/3 px-14 md:px-20">
                         <h1 className="text-white uppercase text-4xl md:text-6xl lg:text-7xl font-extrabold font-poppins">
@@ -69,7 +70,7 @@ export const Home = () => {
                             <br />
                             you need
                         </h1>
-                        <a href="" className="bg-neutral-800 font-poppins text-white uppercase text-sm font-semibold px-4 py-2 mt-2 mx-auto hover:scale-110 hover:text-gray-300 transition-all">
+                        <a onClick={(event) => localStorage.setItem("catName", JSON.stringify("footwear"))} href="/products" className="bg-neutral-800 font-poppins text-white uppercase text-sm font-semibold px-4 py-2 mt-2 mx-auto hover:scale-110 hover:text-gray-300 transition-all">
                             Shop Now
                         </a>
                     </div>
@@ -85,7 +86,7 @@ export const Home = () => {
 
                 {/* New Arrivals */}
                 <div className="">
-                    <h2 className="text-center text-xl font-bold">NEW ARRIVALS</h2>
+                    <h2 className="font-poppins text-center text-4xl font-bold">NEW ARRIVALS</h2>
                     <hr className="border-2 border-gray-600 w-20 mt-3 m-auto"/>
                 </div>
                 <NewArrivals />
@@ -102,7 +103,7 @@ export const Home = () => {
                             Style
                         </h1>
                         <p className="text-gray-600 w-full md:text-xl font-racing">From Least To Almost</p>
-                        <a href="" className="bg-neutral-800 font-Montserrat text-white uppercase text-sm font-semibold px-4 py-2 mt-2 inline-block hover:scale-110 hover:text-gray-300 transition-all">
+                        <a href="" className="bg-neutral-800 font-Montserrat text-white uppercase text-xs font-semibold px-4 py-2 mt-2 inline-block hover:scale-110 hover:text-gray-300 transition-all">
                             Shop Now
                         </a>
                     </div>
@@ -125,7 +126,7 @@ export const Home = () => {
                             apparel 
                         </h1>
                         <p className="text-gray-600 w-full md:text-xl font-racing">Designed For Apparel!</p>
-                        <a href="" className="bg-neutral-800 font-Montserrat text-white uppercase text-sm font-semibold px-4 py-2 mt-2 rounded-md inline-block hover:scale-110 hover:text-gray-300 transition-all">
+                        <a href="" className="bg-neutral-800 font-Montserrat text-white uppercase text-xs font-semibold px-4 py-2 mt-2 inline-block hover:scale-110 hover:text-gray-300 transition-all">
                             Shop Now
                         </a>
                     </div>

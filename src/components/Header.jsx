@@ -54,7 +54,7 @@ export const Header = () => {
             path: "/products"
         },
         {
-            name: "BLOG",
+            name: "CONTACT",
             icon: <TiMessages size={20}/>,
             path: "/contact"
         },
@@ -92,7 +92,7 @@ export const Header = () => {
 
             {/* SearchBar */}
             {
-                <div className={`${showSearchbar ? "flex" : "hidden"} flex-col fixed justify-center overflow-y-scroll bg-white z-50 w-screen p-6`}>
+                <div className={`${showSearchbar ? "flex" : "hidden"} flex-col fixed justify-center overflow-y-scroll bg-white z-[60] w-screen p-6`}>
                     <form action="" className="flex justify-center h-10">
                         <button className="bg-slate-100 px-2"><VscSearch size={15}/></button>
                         <input onChange={(event) => event.target.value === "" ? setSearchTerm(null)  : setSearchTerm(event.target.value)} className="bg-slate-100 inline min-w-80 text-center py-2 rounded outline-none font-poppins" type="text" placeholder="serach product..."/>
@@ -118,7 +118,7 @@ export const Header = () => {
             }
 
             {/* Navigation */}
-            <header className="top-0 fixed w-full z-40">
+            <header className="top-0 fixed w-full z-50">
                 <div className={`bg-${header} mx-auto flex px-8 lg:px-32 py-4 justify-between items-center`}>
                     <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden transition-all">
                         {isMenuOpen ? <AiOutlineClose size={30}/> : <GiHamburgerMenu size={30}/>}

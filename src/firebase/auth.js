@@ -3,10 +3,6 @@ import { auth } from "./firebase"
 import { signInWithEmailAndPassword } from "firebase/auth/cordova"
 import { GoogleAuthProvider } from "firebase/auth/web-extension"
 
-// export const doCreateUserWithEmailAndPassword = async (email, password) => {
-//     return createUserWithEmailAndPassword(auth, email, password)
-// }
-
 export const doSignOut = () => {
     return auth.signOut()
 }
@@ -19,7 +15,12 @@ export const doCreateUserWithEmailAndPassword = async (name, email, password) =>
 }
 
 export const doSignInWithEmailAndPassword = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(auth, email, password).then(userCredential => {
+        return userCredential.user
+    }).catch(error => {
+        const errorCode = error.code
+        const errorMessage = error.message;
+    })
 }
 
 export const doSignInWithGoogle = async () => {

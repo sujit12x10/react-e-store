@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     cart: localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [],
-    user: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null,
+    user: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : [],
 }
 
 const cartSlice = createSlice({
@@ -10,7 +10,8 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action) => {
-            state.user.push(action)
+            const user = action.payload
+            state.user = user
         },
 
         addProduct: (state, action) => {
