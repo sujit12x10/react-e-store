@@ -79,14 +79,13 @@ export const Home = () => {
        
             <ToastContainer autoClose={2000} position="bottom-left" type="error" theme="dark"/>
 
-            {/* Offers Section */}
             <div className="p-12">
                 <h2 className="font-poppins text-center text-4xl font-bold">Popular categories</h2>
                 <FeaturedSection />
 
                 {/* New Arrivals */}
                 <div className="">
-                    <h2 className="font-poppins text-center text-4xl font-bold">NEW ARRIVALS</h2>
+                    <h2 className="font-poppins text-center text-3xl font-bold">NEW ARRIVALS</h2>
                     <hr className="border-2 border-gray-600 w-20 mt-3 m-auto"/>
                 </div>
                 <NewArrivals />

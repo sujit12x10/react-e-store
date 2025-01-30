@@ -1,17 +1,91 @@
+import { useEffect, useState } from "react"
 import { NavLink } from "react-router-dom"
+import { FaCartPlus } from "react-icons/fa6";
+import { Loader, Card } from "../components/index"
 
-export const Test
- = ({product}) => {
+export const Test = () => {
+    const [categoryName, setcategoryName] = useState(localStorage.getItem("catName") ? JSON.parse(localStorage.getItem("catName")) : localStorage.setItem("catName", JSON.stringify("All")))
+    const [products, setProducts] = useState(null)
+    const [filterProducts, setFilterProducts] = useState(null)
+    const [loader, setLoader] = useState(true)
+    const [categories, setCategories] = useState(null)
+    const [navColor, setNavColor] = useState(null)
     
-    return (
-        <NavLink to={`product/${product.slug}`}>
-            <div className="bg-white shadow-md overflow-hidden min-h-96">
-                <img src={product.image_url1} alt="" className="w-full h-72" />
-                <div className="p-4">
-                    <h3 className="text-gray-600 text-sm">{product.name.slice(0, 30)}</h3>
-                    <button className="mt-4 font-semibold text-cyan-900 bg-gray-200 px-3 rounded">₹{product.price}</button>
+    const listenScrollEvent = (event) => {
+        if (window.scrollY > window.innerHeight/2) return setNavColor("bg-neutral-800")
+        else setNavColor(null)
+    }
+
+    useEffect(() => {
+        window.addEventListener('scroll', listenScrollEvent);
+
+        return () =>
+            window.removeEventListener('scroll', listenScrollEvent);
+    }, []);
+    
+    useEffect(() => {
+        fetch("https://sujit1210.pythonanywhere.com/api/v1/categories/")
+        .then((resp) => resp.json())
+        .then((data) => setCategories(data))
+    }, [categories])
+
+    useEffect(() => {
+        fetch(`https://sujit1210.pythonanywhere.com/api/v1/products/`)
+        .then(resp => resp.json())
+        .then(data => {
+            setProducts(data)
+            setLoader(false)
+        })
+    }, [])
+
+    console.log(products);
+    
+    
+    useEffect(() => {
+        if (products){
+            if (categoryName === "All") return
+            else {
+                const filterProducts = products.filter(product => product.category[0] === categoryName)
+                setFilterProducts(filterProducts)
+            }
+        }
+    }, [categoryName])
+
+    return loader ? <Loader /> : (
+        <>
+            {/* Categories */}
+            <div className={`px-12 mt-16 ${navColor ? "" : "hidden"} bg-neutral-800 fixed w-screen z-50`}>
+                <button onClick={() => localStorage.setItem("catName", JSON.stringify("All"))} className={`capitalize mx-3 font-poppins text-sm font-semibold py-4 ${categoryName == "All" ? "text-orange-400" : "text-white"}`}>All</button>
+                {   
+                    categories && categories.map(cat => <button key={cat.name} 
+                        onClick={
+                            () => {localStorage.setItem("catName", JSON.stringify(cat.name))
+                            setcategoryName(cat.name)}
+                        } 
+                        className={`uppercase mx-3 font-poppins text-sm font-semibold py-4 ${cat.name === categoryName ? "text-orange-400" : "text-white"}`}>{cat.name}</button>)
+                }
+            </div>
+
+            {/* Herosection */}
+            <div style={{'--image-url': `url("https://mb-demo1.myshopify.com/cdn/shop/files/marbo-fashion-slider-images-01.jpg?v=1695389331&width=1500")`}} className='bg-[image:var(--image-url)] h-screen w-screen bg-cover bg-[50%] relative flex justify-center items-center overflow-hidden px-10'>
+                <div className="py-12 z-10 absolute bg-black opacity-50 px-20">
+                    <h1 className="text-white uppercase text-4xl md:text-7xl font-extrabold font-poppins text-center">
+                        All New Collection
+                    </h1>
+                    <p className="text-white w-full md:text-xl text-center font-racing">
+                        Treat Yourself, with Awesome Products!
+                    </p>
                 </div>
             </div>
-        </NavLink>
+
+            {/* Product Section */}
+            <div className="flex flex-wrap justify-center px-12 py-16 gap-5">
+                {
+                    products && products.map(product => (
+                        <Card key={product.id} product={product}/>
+                    ))
+                }
+            </div>
+        </>
     )
 }

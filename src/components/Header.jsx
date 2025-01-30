@@ -1,5 +1,4 @@
 import { NavLink, useNavigate } from "react-router-dom"
-
 import { IoSearchSharp } from "react-icons/io5"
 import { IoCartSharp } from "react-icons/io5";
 import { VscSearch } from "react-icons/vsc";
@@ -9,7 +8,6 @@ import { AiOutlineHome } from "react-icons/ai";
 import { GiShoppingBag } from "react-icons/gi";
 import { IoMdInformationCircle } from "react-icons/io";
 import { TiMessages } from "react-icons/ti";
-
 import { Card } from "../components/index"
 
 import { useEffect, useState } from "react"

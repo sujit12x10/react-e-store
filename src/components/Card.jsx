@@ -3,17 +3,19 @@ import { NavLink } from "react-router-dom"
 export const Card = ({product}) => {
     
     return (     
-            <div className="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/30">
-                <img src={product.image_url1} alt="" className="w-full h-60 duration-500 group-hover:scale-x-125 group-hover:scale-y-125 transition-transform" />
-                <div className="absolute hidden group-hover:block inset-0 bg-gradient-to-b from-transparent via-transparent to-gray-100 group-hover:from-black/70 group-hover:via-black/60 group-hover:to-black/70"></div>
-                <div className="absolute inset-0 flex flex-col space-y-4 items-center justify-center px-9 text-center translate-y-[60%] transition-all duration-700 group-hover:translate-y-0">
-                    <h3 className="text-white italic opacity-0 group-hover:opacity-100 duration-300">{product.name}</h3>
-                    <NavLink to={`/product/${product.slug}`}>
-                        <button className="bg-neutral-900 shadow shadow-black/60 rounded-full py-2 px-3.5 text-sm capitalize text-white">See More</button>
-                    </NavLink>
+        <div className="bg-white shadow hover:scale-105 duration-300 w-72 overflow-hidden rounded" key={product.id}>
+            <img className="h-80 w-full" src={product.image_url1} alt="" />
+            <div className="px-4 py-3">
+                <span className="text-orange-500 bg-orange-100 uppercase text-xs font-bold px-2 py-1 rounded">{product.category[0]}</span>
+                <p className="text-sm font-semibold truncate capitalize py-3">{product.name}</p>
+                <div className="flex items-center py-3">
+                    <p className="text-sm font-bold bg-green-100 text-green-600 rounded py-1 px-2">₹ {product.price}</p>
+                    <div className="ml-auto">
+                        {/* <button className="flex items-center bg-[#333] text-white px-2 py-1 rounded text-sm"><span className="mr-1"><FaCartPlus color="white" size={12}/></span>Add to Cart</button> */}
+                    </div>
                 </div>
-                <h1 className="text-black font-bold mt-4 px-3">₹{product.price}</h1>
             </div>
+        </div>
         
     )
 }

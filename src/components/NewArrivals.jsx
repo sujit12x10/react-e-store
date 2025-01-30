@@ -8,14 +8,16 @@ export const NewArrivals = () => {
     useEffect(() => {
         fetch("https://sujit1210.pythonanywhere.com/api/v1/products/")
         .then((resp) => resp.json())
-        .then((data) => setProducts(data.slice(0, 12)))
-        .then(setLoader(false))
+        .then(data => {
+            setProducts(data.slice(0, 12))
+            setLoader(false)
+        })
     }, [products])
 
     return loader ? <Loader /> : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 mt-8">
+        <div className="flex flex-wrap justify-center px-12 py-16 gap-5">
             {
-                products && products.map((product) => (
+                products && products.map(product => (
                     <Card key={product.id} product={product}/>
                 ))
             }
