@@ -15,7 +15,7 @@ export const NewArrivals = () => {
     }, [products])
 
     return loader ? <Loader /> : (
-        <div className="flex flex-wrap justify-center px-12 py-16 gap-5">
+        <div className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-5 mt-10 mb-5">
             {
                 products && products.map(product => (
                     <Card key={product.id} product={product}/>

@@ -1,90 +1,41 @@
-import { useEffect, useState } from "react"
-import { NavLink } from "react-router-dom"
-import { FaCartPlus } from "react-icons/fa6";
-import { Loader, Card } from "../components/index"
-
 export const Test = () => {
-    const [categoryName, setcategoryName] = useState(localStorage.getItem("catName") ? JSON.parse(localStorage.getItem("catName")) : localStorage.setItem("catName", JSON.stringify("All")))
-    const [products, setProducts] = useState(null)
-    const [filterProducts, setFilterProducts] = useState(null)
-    const [loader, setLoader] = useState(true)
-    const [categories, setCategories] = useState(null)
-    const [navColor, setNavColor] = useState(null)
-    
-    const listenScrollEvent = (event) => {
-        if (window.scrollY > window.innerHeight/2) return setNavColor("bg-neutral-800")
-        else setNavColor(null)
-    }
-
-    useEffect(() => {
-        window.addEventListener('scroll', listenScrollEvent);
-
-        return () =>
-            window.removeEventListener('scroll', listenScrollEvent);
-    }, []);
-    
-    useEffect(() => {
-        fetch("https://sujit1210.pythonanywhere.com/api/v1/categories/")
-        .then((resp) => resp.json())
-        .then((data) => setCategories(data))
-    }, [categories])
-
-    useEffect(() => {
-        fetch(`https://sujit1210.pythonanywhere.com/api/v1/products/`)
-        .then(resp => resp.json())
-        .then(data => {
-            setProducts(data)
-            setLoader(false)
-        })
-    }, [])
-
-    console.log(products);
-    
-    
-    useEffect(() => {
-        if (products){
-            if (categoryName === "All") return
-            else {
-                const filterProducts = products.filter(product => product.category[0] === categoryName)
-                setFilterProducts(filterProducts)
-            }
-        }
-    }, [categoryName])
-
-    return loader ? <Loader /> : (
+    return(
         <>
-            {/* Categories */}
-            <div className={`px-12 mt-16 ${navColor ? "" : "hidden"} bg-neutral-800 fixed w-screen z-50`}>
-                <button onClick={() => localStorage.setItem("catName", JSON.stringify("All"))} className={`capitalize mx-3 font-poppins text-sm font-semibold py-4 ${categoryName == "All" ? "text-orange-400" : "text-white"}`}>All</button>
-                {   
-                    categories && categories.map(cat => <button key={cat.name} 
-                        onClick={
-                            () => {localStorage.setItem("catName", JSON.stringify(cat.name))
-                            setcategoryName(cat.name)}
-                        } 
-                        className={`uppercase mx-3 font-poppins text-sm font-semibold py-4 ${cat.name === categoryName ? "text-orange-400" : "text-white"}`}>{cat.name}</button>)
-                }
-            </div>
-
-            {/* Herosection */}
-            <div style={{'--image-url': `url("https://mb-demo1.myshopify.com/cdn/shop/files/marbo-fashion-slider-images-01.jpg?v=1695389331&width=1500")`}} className='bg-[image:var(--image-url)] h-screen w-screen bg-cover bg-[50%] relative flex justify-center items-center overflow-hidden px-10'>
-                <div className="py-12 z-10 absolute bg-black opacity-50 px-20">
-                    <h1 className="text-white uppercase text-4xl md:text-7xl font-extrabold font-poppins text-center">
-                        All New Collection
-                    </h1>
-                    <p className="text-white w-full md:text-xl text-center font-racing">
-                        Treat Yourself, with Awesome Products!
+            <div className="grid lg:grid-cols-2 gap-10 mt-28 px-12 md:px-24 mb-20">
+                <div className="col-span-1 bg-slate-600">
+                    <img className="w-full h-full" src="https://www.pxdraft.com/wrap/shopapp/assets/img/pages/blog_1-6.jpg" alt="" />
+                </div>
+                <div className="lg:col-span-1 flex flex-col justify-center">
+                    <h1 className="font-[900] text-[#333333] text-2xl uppercase font-Montserrat text-center">BLAKE</h1>
+                    <span className="font-semibold text-center mb-6">Elevate Your Everyday</span>
+                    
+                    <p className="font-semibold">
+                        <span className="">At BLAKE, our purpose is simple, to live and deliver WOW...</span> <br />
+                        We try to provide the very best customer service, customer experience, and company culture.
+                        Deliver happiness to customers, employees, vendors, shareholders, and the community in a long-term, sustainable way.
+                        We aim to inspire the world by showing it's possible to simultaneously deliver happiness to customers, employees, vendors, shareholders, and the community in a long-term, sustainable way. 
                     </p>
                 </div>
             </div>
-
-            {/* Product Section */}
-            <div className="flex flex-wrap justify-center px-12 py-16 gap-5">
-                {
-                    products && products.map(product => (
-                        <Card key={product.id} product={product}/>
-                    ))
-                }
+            <div className="grid md:grid-cols-3 gap-2 md:gap-12 bg-neutral-800 px-16 lg:px-28 py-12">
+                <div className="grid-cols-1 text-white">
+                    <h1 className="text-xl font-bold font-poppins py-4 uppercase">Our Vision</h1>
+                    <p>
+                    Flone provide how all this mistaken idea of denounc pleasure and sing pain was born an will give you a ete account of the system, and expound the actual teangs the eat explorer of the truth.
+                    </p>
+                </div>
+                <div className="grid-cols-1 text-white">
+                    <h1 className="text-xl font-bold font-poppins py-4 uppercase">Our Mission</h1>
+                    <p>
+                        Flone provide how all this mistaken idea of denounc pleasure and sing pain was born an will give you a ete account of the system, and expound the actual teangs the eat explorer of the truth.
+                    </p>
+                </div>
+                <div className="grid-cols-1 text-white">
+                    <h1 className="text-xl font-bold font-poppins py-4 uppercase">Our Goal</h1>
+                    <p>
+                    Flone provide how all this mistaken idea of denounc pleasure and sing pain was born an will give you a ete account of the system, and expound the actual teangs the eat explorer of the truth.
+                    </p>
+                </div>
             </div>
         </>
     )

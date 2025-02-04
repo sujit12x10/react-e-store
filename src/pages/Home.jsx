@@ -3,24 +3,18 @@ import { NavLink, useLocation } from "react-router-dom"
 import { HeroImage, Loader, Crousel  } from "../components/index"
 import { ToastContainer, toast } from 'react-toastify';
 import { ProductCard, WomenCollections, MenCollections, FeaturedSection, Card, NewArrivals } from "../components/index"
+import { motion } from "framer-motion";
 
 export const Home = () => {
 
+    const [products, setProducts] = useState(null)
     const [loader, setLoader] = useState({
         newArrivalLoader: true,
         womenCollectionLoader: true,
         menCollectionLoader: true,
     })
-    const [products, setProducts] = useState(null)
-    const location = useLocation()
 
-    const notify = () => {
-        toast.success(location.state)
-    }
-
-    // useEffect(() => {
-    //     location.state && notify()
-    // }, [])
+    const notify = () => toast.success("Successfully logged in!")
 
     useEffect(() => {
         fetch("https://sujit1210.pythonanywhere.com/api/v1/products/")
@@ -31,25 +25,43 @@ export const Home = () => {
     return (
         <>
             <Crousel>
-                <div style={{'--image-url': `url("https://avedafashion.myshopify.com/cdn/shop/files/parallaxbackground1.png?v=1614316643")`}} className='bg-[image:var(--image-url)] h-screen w-screen bg-cover bg-[60%] relative overflow-hidden'>
-                    <div className="mb-64 z-10 absolute top-1/3 px-10 md:px-20">
-                        <h1 className="text-[#333333] uppercase text-4xl md:text-6xl lg:text-7xl font-extrabold font-poppins">
+                <motion.div 
+                    initial={{ x:"100vw" }}
+                    animate={{ x:0 }}
+                    transition={{ type:"spring", delay:0.5 }}
+                    style={{'--image-url': `url("https://www.pxdraft.com/wrap/shopapp/assets/img/fashion2/home-banner-3.jpg")`}} className='bg-[image:var(--image-url)] h-screen w-screen bg-cover bg-[60%] relative overflow-hidden'
+                >
+                    <div className="mb-64 z-10 absolute top-1/3 px-10 md:px-20"
+                    >
+                        <motion.h1
+                            className="text-white uppercase text-4xl md:text-6xl lg:text-7xl font-extrabold font-poppins"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity:1 }}
+                            transition={{ duration:4, delay:1 }}
+                        >
                             Style 
                             <br />
                             Your
                             <br />
                             Confidence
-                        </h1>
+                        </motion.h1>
                         <p className="text-gray-600 w-full font-racing text-2xl">Dress smart, look trendy!</p>
-                        <a href="/products" className="bg-neutral-800 font-Montserrat text-white uppercase text-sm font-semibold px-4 py-2 mt-2 inline-block hover:scale-110 hover:text-gray-300 transition-all">
+                        <motion.a href="/products" 
+                            initial={{ y:1000 }}
+                            animate={{ y: 0 }}
+                            transition={{delay:3, type:"spring", stiffness:120 }}
+                            className="bg-neutral-800 font-Montserrat text-white uppercase text-sm font-semibold px-4 py-2 mt-2 inline-block hover:scale-110 hover:text-gray-300 transition-all"
+                        >
                             Explore Products
-                        </a>
+                        </motion.a>
                     </div>
-                </div>
+                </motion.div>
                 
-                <div style={{'--image-url': `url("https://www.pxdraft.com/wrap/shopapp/assets/img/fashion2/home-banner-3.jpg")`}} className='bg-[image:var(--image-url)] h-screen w-screen bg-cover bg-[60%] relative overflow-hidden'>
+                <div 
+                    style={{'--image-url': `url("https://avedafashion.myshopify.com/cdn/shop/files/parallaxbackground1.png?v=1614316643")`}} className='bg-[image:var(--image-url)] h-screen w-screen bg-cover bg-[60%] relative overflow-hidden'
+                >
                     <div className="mb-64 z-10 absolute top-1/3 px-14 md:px-20">
-                        <h1 className="text-white uppercase text-4xl md:text-6xl lg:text-7xl font-extrabold font-poppins">
+                        <h1 className="text-[#333333] uppercase text-4xl md:text-6xl lg:text-7xl font-extrabold font-poppins">
                             20% OFF NEW! 
                             <br />
                             Limited Edition
@@ -76,9 +88,6 @@ export const Home = () => {
                     </div>
                 </div>
             </Crousel>
-       
-            <ToastContainer autoClose={2000} position="bottom-left" type="error" theme="dark"/>
-
             <div className="p-12">
                 <h2 className="font-poppins text-center text-4xl font-bold">Popular categories</h2>
                 <FeaturedSection />

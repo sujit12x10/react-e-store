@@ -34,7 +34,7 @@ export const Product = () => {
         product && 
             fetch(`https://sujit1210.pythonanywhere.com/api/v1/categories/${product.category[0]}/products/`)
             .then((resp) => resp.json())
-            .then((data) => setRelatedProduct(data.slice(0, 5)))
+            .then((data) => setRelatedProduct(data.slice(0, 3)))
     }, [product])
     
     return (
@@ -93,13 +93,12 @@ export const Product = () => {
                             <div className="mt-10 p-8">
                                 <h2 className="text-center text-xl font-bold">You may also like</h2>
                                 <hr className="border-2 border-gray-600 w-20 mt-3 m-auto"/>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 mt-8">
-
-                                {
-                                    relatedProduct.map(product => (
-                                        <Card key={product.id} product={product}/>
-                                    ))
-                                }
+                                <div className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
+                                    {
+                                        relatedProduct.map(product => (
+                                            <Card key={product.id} product={product}/>
+                                        ))
+                                    }
                                 </div>
                             </div>
                         }

@@ -3,24 +3,48 @@ import { auth } from "./firebase"
 import { signInWithEmailAndPassword } from "firebase/auth/cordova"
 import { GoogleAuthProvider } from "firebase/auth/web-extension"
 
+
+const  mapAuthCodeToMessage = (authCode) => {
+    console.log(authCode);
+    
+    switch (authCode) {
+      case "auth/invalid-password":
+        return "Password provided is not corrected";
+  
+      case "auth/invalid-email":
+        return "Email provided is invalid";
+  
+      // Many more authCode mapping here...
+  
+      default:
+        return "";
+    }
+}
+
 export const doSignOut = () => {
     return auth.signOut()
 }
 
 export const doCreateUserWithEmailAndPassword = async (name, email, password) => {
-    const result = await createUserWithEmailAndPassword(auth, email, password)
-    await updateProfile(auth.currentUser, { displayName: name }).then(doSignOut()).catch(
-        (err) => console.log(err)
-    );
+    try{
+        const result = await createUserWithEmailAndPassword(auth, email, password)
+        updateProfile(auth.currentUser, { displayName: name }).then(doSignOut())
+        return "success"
+    } catch (error){
+        const errorMessage = error.message;
+        return errorMessage
+      }
 }
 
-export const doSignInWithEmailAndPassword = (email, password) => {
-    signInWithEmailAndPassword(auth, email, password).then(userCredential => {
-        return userCredential.user
-    }).catch(error => {
-        const errorCode = error.code
+export const doSignInWithEmailAndPassword = async (email, password) => {
+    try {
+        const result = await signInWithEmailAndPassword(auth, email, password)
+        return "success"
+    } catch (error){
         const errorMessage = error.message;
-    })
+        return errorMessage
+    }
+    
 }
 
 export const doSignInWithGoogle = async () => {
